@@ -1,0 +1,40 @@
+digraph MAIN {
+  graph [rankdir=LR, splines=ortho, nodesep=0.55, ranksep=0.8, bgcolor="white"];
+  node [shape=box, style="rounded,filled", fontname="Noto Sans CJK SC", fontsize=12, color="#3d4a5a", penwidth=1.3, fillcolor="#eef6ff"];
+  edge [color="#5c6f82", penwidth=1.3, arrowsize=0.8, fontname="Noto Sans CJK SC", fontsize=10];
+
+  d [label="各模块发布 /diagnostics\n(DiagnosticArray)", fillcolor="#fff6e9"];
+  a [label="diagnostic_graph_aggregator\n按 status.name 匹配图配置", fillcolor="#e7f3ff"];
+  s [label="/diagnostics_graph/status", fillcolor="#ebfff3"];
+  u [label="/diagnostics_graph/unknowns\n(未命中项)", fillcolor="#ffeef0"];
+
+  m [label="ModesAvailability\n输出 /system/operation_mode/availability", fillcolor="#eef9ff"];
+  h [label="mrm_handler\n基于 availability 判定 isEmergency", fillcolor="#fff0f0"];
+  ms [label="/system/fail_safe/mrm_state", fillcolor="#f8f9fb"];
+  g [label="/system/emergency/gear_cmd", fillcolor="#f8f9fb"];
+  hl [label="/system/emergency/hazard_lights_cmd", fillcolor="#f8f9fb"];
+  op [label="调用 MRM operator\n(pull_over / comfortable_stop / emergency_stop)", fillcolor="#fff8dc"];
+
+  hz [label="hazard_status_converter", fillcolor="#f3f2ff"];
+  hzt [label="/system/emergency/hazard_status", fillcolor="#f8f9fb"];
+
+  ad [label="default_adapi diagnostics", fillcolor="#f2fff4"];
+  api [label="/api/system/diagnostics/status", fillcolor="#f8f9fb"];
+
+  d -> a;
+  a -> s [label="命中"];
+  a -> u [label="未命中", color="#d35454", fontcolor="#d35454"];
+
+  s -> m;
+  m -> h;
+  h -> ms;
+  h -> g;
+  h -> hl;
+  h -> op;
+
+  s -> hz;
+  hz -> hzt;
+
+  s -> ad;
+  ad -> api;
+}

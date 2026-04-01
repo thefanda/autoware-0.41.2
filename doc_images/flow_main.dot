@@ -1,0 +1,40 @@
+digraph G {
+  graph [rankdir=LR, splines=spline, nodesep=0.5, ranksep=0.7, bgcolor="white"];
+  node [shape=box, style="rounded,filled", fontname="DejaVu Sans", fontsize=12, color="#2c3e50", fillcolor="#ecf5ff", penwidth=1.3];
+  edge [color="#5b6b7a", penwidth=1.2, arrowsize=0.8, fontname="DejaVu Sans", fontsize=10];
+
+  diag [label="/diagnostics\n(raw DiagnosticArray)", fillcolor="#fff6e8"];
+  aggr [label="diagnostic_graph_aggregator\n(match by status.name)", fillcolor="#e8f5ff"];
+  status [label="/diagnostics_graph/status", fillcolor="#eafaf1"];
+  unknown [label="/diagnostics_graph/unknowns\n(unmatched diagnostics)", fillcolor="#fdecec"];
+
+  avail [label="ModesAvailability\n/system/operation_mode/availability", fillcolor="#edf7ff"];
+  mrm [label="mrm_handler\nEmergency decision", fillcolor="#fff1f1"];
+  mrm_state [label="/system/fail_safe/mrm_state", fillcolor="#f8f9fa"];
+  gear [label="/system/emergency/gear_cmd", fillcolor="#f8f9fa"];
+  hazard_cmd [label="/system/emergency/hazard_lights_cmd", fillcolor="#f8f9fa"];
+  mrm_ops [label="Call MRM operators\n(pull_over / comfortable_stop / emergency_stop)", fillcolor="#fef7e0"];
+
+  hazard_conv [label="hazard_status_converter", fillcolor="#f2f2ff"];
+  hazard [label="/system/emergency/hazard_status", fillcolor="#f8f9fa"];
+
+  adapi_diag [label="default_adapi diagnostics", fillcolor="#f2fff4"];
+  api_diag [label="/api/system/diagnostics/status", fillcolor="#f8f9fa"];
+
+  diag -> aggr;
+  aggr -> status [label="matched"];
+  aggr -> unknown [label="not matched", color="#c0392b", fontcolor="#c0392b"];
+
+  status -> avail;
+  avail -> mrm;
+  mrm -> mrm_state;
+  mrm -> gear;
+  mrm -> hazard_cmd;
+  mrm -> mrm_ops;
+
+  status -> hazard_conv;
+  hazard_conv -> hazard;
+
+  status -> adapi_diag;
+  adapi_diag -> api_diag;
+}

@@ -1,0 +1,36 @@
+digraph SUBS {
+  graph [rankdir=LR, splines=polyline, nodesep=0.55, ranksep=0.75, bgcolor="white"];
+  node [shape=box, style="rounded,filled", fontname="Noto Sans CJK SC", fontsize=11, color="#3d4a5a", penwidth=1.3, fillcolor="#eef6ff"];
+  edge [color="#5c6f82", penwidth=1.2, arrowsize=0.75, fontname="Noto Sans CJK SC", fontsize=10];
+
+  diag [label="/diagnostics", fillcolor="#fff6e9"];
+  graphstatus [label="/diagnostics_graph/status", fillcolor="#eafaf1"];
+  avail [label="/system/operation_mode/availability", fillcolor="#eef9ff"];
+  initstate [label="/api/localization/initialization_state", fillcolor="#e7fff3"];
+
+  aggr [label="aggregator\n(接收 /diagnostics)"];
+  comp [label="component_state_monitor\n(仅看 topic_state_monitor hardware_id)"];
+
+  modes [label="ModesAvailability\n(接收 graph status)"];
+  haz [label="hazard_status_converter\n(接收 graph status)"];
+  ad [label="default_adapi diagnostics\n(接收 graph status)"];
+
+  mrm [label="mrm_handler\n(接收 availability)", fillcolor="#fff0f0"];
+  opm [label="default_adapi operation_mode\n(接收 availability)"];
+
+  aws [label="autoware_state\n(接收 initialization_state)", fillcolor="#fff9e8"];
+  apinit [label="automatic_pose_initializer\n(接收 initialization_state)"];
+
+  diag -> aggr;
+  diag -> comp;
+
+  graphstatus -> modes;
+  graphstatus -> haz;
+  graphstatus -> ad;
+
+  avail -> mrm;
+  avail -> opm;
+
+  initstate -> aws;
+  initstate -> apinit;
+}

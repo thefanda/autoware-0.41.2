@@ -1,0 +1,52 @@
+# Vim
+*.swp
+*.swo
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# colcon
+build/
+install/
+log/
+/src/
+
+# Python
+*.pyc
+
+# Jetbrains
+.idea/
+
+# rviz Screen Capture
+capture/
+
+# CodeChecker
+.codechecker/
+
+# Node.js
+node_modules/
+build/
+install/
+log/
+
+# Local workspace artifacts
+.codex
+.codex/
+.tmp_docx_style/
+tmp_map_work/
+.~*
+get_name())
+
+# Local rosbag dumps
+rosbag2_*/
+
+# Local exported reports and diagrams
+coord_convert_pcd_flow.png
+coord_convert_pcd_flow.svg
+coord_convert_pcd_flow_docx_style_compact.png
+ndt_system_command_comparison_report*.doc
+ndt_system_command_comparison_report*.html
+ndt_troubleshooting_flow.png
+ndt_troubleshooting_flow.svg
+ndt_troubleshooting_flow_cn.png

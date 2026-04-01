@@ -1,0 +1,43 @@
+digraph INITDIAG {
+  graph [rankdir=LR, splines=ortho, nodesep=0.6, ranksep=0.9, bgcolor="white"];
+  node [shape=box, style="rounded,filled", fontname="Noto Sans CJK SC", fontsize=11, color="#3d4a5a", penwidth=1.3, fillcolor="#eef6ff"];
+  edge [color="#5c6f82", penwidth=1.25, arrowsize=0.75, fontname="Noto Sans CJK SC", fontsize=10];
+
+  subgraph cluster_api {
+    label="A. Localization 初始化接口链";
+    color="#85a6d6";
+    style="rounded";
+
+    cli [label="客户端调用\n/api/localization/initialize", fillcolor="#fff6e9"];
+    adapi [label="default_adapi localization 节点", fillcolor="#e7f3ff"];
+    intsrv [label="/localization/initialize\n(内部服务)", fillcolor="#eef9ff"];
+    ret [label="返回 ResponseStatus\n(ERROR_UNSAFE / ERROR_GNSS / ...)", fillcolor="#ffeef0"];
+
+    cli -> adapi -> intsrv -> ret;
+  }
+
+  subgraph cluster_state {
+    label="B. 初始化状态消息链";
+    color="#86c5a4";
+    style="rounded";
+
+    st1 [label="/localization/initialization_state\n(内部)", fillcolor="#eef9ff"];
+    st2 [label="/api/localization/initialization_state\n(ADAPI转发)", fillcolor="#e7fff3"];
+    aw [label="autoware_state\n若 != INITIALIZED -> INITIALIZING", fillcolor="#fff9e8"];
+
+    st1 -> st2 -> aw;
+  }
+
+  subgraph cluster_diag {
+    label="C. Diagnostics 主链（与 A/B 不同）";
+    color="#d59f8c";
+    style="rounded";
+
+    d [label="/diagnostics", fillcolor="#fff6e9"];
+    g [label="diagnostic_graph_aggregator", fillcolor="#e7f3ff"];
+    av [label="/system/operation_mode/availability", fillcolor="#eef9ff"];
+    mrm [label="mrm_handler", fillcolor="#fff0f0"];
+
+    d -> g -> av -> mrm;
+  }
+}

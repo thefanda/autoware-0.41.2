@@ -1,0 +1,24 @@
+digraph L {
+  graph [rankdir=TB, splines=polyline, nodesep=0.45, ranksep=0.6, bgcolor="white"];
+  node [shape=box, style="rounded,filled", fontname="DejaVu Sans", fontsize=12, color="#2c3e50", fillcolor="#f7fbff", penwidth=1.3];
+  edge [color="#5b6b7a", penwidth=1.2, arrowsize=0.8, fontname="DejaVu Sans", fontsize=10];
+
+  ekf [label="Example diagnostic:\n\"localization: ekf_localizer\" = ERROR", fillcolor="#fff6e8"];
+  leaf [label="Match leaf in localization.yaml:\n/autoware/localization/sensor_fusion_status", fillcolor="#e8f5ff"];
+  loc [label="/autoware/localization\n(short-circuit-and)", fillcolor="#edf7ff"];
+  auto [label="/autoware/modes/autonomous\n(and)", fillcolor="#edf7ff"];
+  avail [label="/system/operation_mode/availability\nautonomous = false", fillcolor="#fff1f1"];
+  emerg [label="mrm_handler: isEmergency = true", fillcolor="#fff1f1"];
+  mrm [label="MRM transition\n(default often emergency_stop)", fillcolor="#fdecec"];
+
+  unknown_case [label="If name mismatch:\n-> /diagnostics_graph/unknowns\n-> no main-chain trigger", fillcolor="#f8f9fa", color="#8e44ad"];
+
+  ekf -> leaf;
+  leaf -> loc;
+  loc -> auto;
+  auto -> avail;
+  avail -> emerg;
+  emerg -> mrm;
+
+  ekf -> unknown_case [style=dashed, color="#8e44ad", fontcolor="#8e44ad", label="name mismatch"];
+}

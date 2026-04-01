@@ -1,0 +1,24 @@
+digraph LOC {
+  graph [rankdir=TB, splines=polyline, nodesep=0.5, ranksep=0.7, bgcolor="white"];
+  node [shape=box, style="rounded,filled", fontname="Noto Sans CJK SC", fontsize=12, color="#3d4a5a", penwidth=1.3, fillcolor="#eef6ff"];
+  edge [color="#5c6f82", penwidth=1.3, arrowsize=0.8, fontname="Noto Sans CJK SC", fontsize=10];
+
+  ex [label="示例诊断\n\"localization: ekf_localizer\" = ERROR", fillcolor="#fff6e9"];
+  leaf [label="命中 leaf:\n/autoware/localization/sensor_fusion_status", fillcolor="#e7f3ff"];
+  loc [label="/autoware/localization\n(short-circuit-and 聚合)", fillcolor="#eef9ff"];
+  auto [label="/autoware/modes/autonomous\n(and 聚合)", fillcolor="#eef9ff"];
+  avail [label="/system/operation_mode/availability\nautonomous = false", fillcolor="#fff0f0"];
+  emerg [label="mrm_handler: isEmergency = true", fillcolor="#fff0f0"];
+  mrm [label="进入 MRM 状态机\n(默认更常走 emergency_stop)", fillcolor="#ffeef0"];
+
+  mismatch [label="若名称不匹配图配置:\n-> /diagnostics_graph/unknowns\n-> 不影响主链", fillcolor="#f8f2ff", color="#7e57c2"];
+
+  ex -> leaf;
+  leaf -> loc;
+  loc -> auto;
+  auto -> avail;
+  avail -> emerg;
+  emerg -> mrm;
+
+  ex -> mismatch [style=dashed, color="#7e57c2", fontcolor="#7e57c2"];
+}
