@@ -1,0 +1,28 @@
+/**:
+  ros__parameters:
+    base_frame: base_link
+    processing_time_threshold_sec: 0.01
+
+    # Remove ego-vehicle points by cropping a box around the vehicle.
+    # This uses crop_box.negative=true (keep-outside mode).
+    #
+    # Assumption: base_link origin is approximately at the wheel center.
+    # - +X: forward, -X: backward
+    # - +Y: left,    -Y: right
+    # - +Z: up
+    #
+    # Vehicle extents (from user input):
+    # - Front: 6.70 m
+    # - Rear : 2.02 m
+    # - Left : 1.135 m
+    # - Right: 1.135 m
+    # - Ground: 0.522 m below wheel center
+    # - Roof  : 2.45 m above wheel center
+    crop_box.negative: true
+    crop_box.min_x: [-2.1]
+    crop_box.max_x: [6.8]
+    crop_box.min_y: [-1.4]
+    crop_box.max_y: [1.4]
+    crop_box.min_z: [-0.6]
+    crop_box.max_z: [2.6]
+

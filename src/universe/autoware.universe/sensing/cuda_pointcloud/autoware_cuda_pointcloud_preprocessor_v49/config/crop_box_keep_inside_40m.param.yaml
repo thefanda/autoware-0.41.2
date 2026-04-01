@@ -1,0 +1,15 @@
+/**:
+  ros__parameters:
+    base_frame: base_link
+    processing_time_threshold_sec: 0.01
+
+    # Keep points inside the 40m cube around base_link.
+    # NOTE: This uses crop_box.negative=false (keep-inside mode).
+    crop_box.negative: false
+    crop_box.min_x: [-100.0]
+    crop_box.min_y: [-100.0]
+    crop_box.min_z: [-20.0]
+    crop_box.max_x: [100.0]
+    crop_box.max_y: [100.0]
+    crop_box.max_z: [20.0]
+

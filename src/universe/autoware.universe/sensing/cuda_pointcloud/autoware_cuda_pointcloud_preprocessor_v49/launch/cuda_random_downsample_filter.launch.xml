@@ -1,0 +1,12 @@
+<launch>
+  <arg name="input/pointcloud" default="/sensing/lidar/concatenated/pointcloud"/>
+  <arg name="output/pointcloud" default="/sensing/lidar/top/random_downsampled"/>
+
+  <arg name="cuda_random_downsample_filter_param_file" default="$(find-pkg-share autoware_cuda_pointcloud_preprocessor_v49)/config/cuda_random_downsample_filter.param.yaml"/>
+
+  <node pkg="autoware_cuda_pointcloud_preprocessor_v49" exec="cuda_random_downsample_filter_node_v49" name="cuda_random_downsample_filter_v49" output="screen">
+    <remap from="~/input/pointcloud" to="$(var input/pointcloud)"/>
+    <remap from="~/output/pointcloud" to="$(var output/pointcloud)"/>
+    <param from="$(var cuda_random_downsample_filter_param_file)"/>
+  </node>
+</launch>

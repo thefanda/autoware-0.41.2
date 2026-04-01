@@ -1,0 +1,26 @@
+#BodyControl_ADCU.msg
+
+uint8 gas_horn_activation_switch
+uint8 electric_horn_activation_switch
+uint8 ad_wiper_switch
+uint8 ad_wiper_control
+uint8 ad_headlamp_switch
+uint8 ad_headlamp_control
+uint8 turn_lamp_control
+uint8 brakelight_command
+uint8 ad_washer_switch
+uint8 fog_light_switch
+uint8 ambient_light_display_request
+uint8 seatbelt_tighten_request
+uint8 door_emergency_unlocking
+uint8 seat_vibration_request
+uint8 hazardlight_switch
+uint8 lidar_wash_switch
+uint8 rearlight_switch
+uint8 lift_switch
+
+int64 time_pub
+int64 time_meas
+int8 channel_id
+int32 can_id
+uint8[8] data

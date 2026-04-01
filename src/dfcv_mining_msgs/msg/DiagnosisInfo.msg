@@ -1,0 +1,20 @@
+#Diagnosis_Info.msg
+
+std_msgs/Header header
+
+uint8 diagnosis_flag
+uint32[] c_can_connection_error_id
+uint32[] b_can_connection_error_id
+uint32[] p_can_connection_error_id
+uint32[] imu_connection_error_id
+
+uint8 c_can_disconnection_error_flag
+uint8 b_can_disconnection_error_flag
+uint8 p_can_disconnection_error_flag
+uint8 imu_disconnection_error_flag
+
+uint8 c_can_length_error
+uint8 b_can_length_error
+uint8 p_can_length_error
+uint8 imu_length_error
+uint8 t_box_length_error

@@ -1,0 +1,9 @@
+<launch>
+  <arg name="config_file" default="$(find-pkg-share infinite_loop_cpp)/config/infinite_loop.yaml"/>
+
+  <node pkg="infinite_loop_cpp" exec="infinite_loop_node" name="infinite_loop_node" output="screen">
+    
+    <param from="$(var config_file)"/>
+    
+  </node>
+</launch>

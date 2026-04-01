@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="infinite_loop_cpp" exec="map_parser_node" name="map_parser_node" output="screen">
+        <remap from="/map/vector_map" to="/map/vector_map"/>
+    </node>
+
+</launch>

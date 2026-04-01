@@ -1,0 +1,2 @@
+autoware_internal_planning_msgs_v49/CandidateTrajectory[] candidate_trajectories
+autoware_internal_planning_msgs_v49/GeneratorInfo[] generator_info

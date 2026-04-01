@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.14)
+project(autoware_utils_rclcpp_v49)
+
+find_package(autoware_cmake_v49 REQUIRED)
+autoware_package()
+
+if(BUILD_TESTING)
+  file(GLOB_RECURSE test_files test/*.cpp)
+  ament_auto_add_gtest(test_${PROJECT_NAME} ${test_files})
+endif()
+
+ament_auto_package()

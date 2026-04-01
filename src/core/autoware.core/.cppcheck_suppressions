@@ -1,0 +1,6 @@
+*:*/test/*
+
+missingInclude
+missingIncludeSystem
+unmatchedSuppression
+unusedFunction

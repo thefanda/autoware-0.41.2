@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package format="3">
+  <name>autoware_agnocast_wrapper_v49</name>
+  <version>0.48.0</version>
+  <description>Wrapper macros for Agnocast (true zero-copy communication library)</description>
+  <maintainer email="sykwer@gmail.com">Takahiro Ishikawa-Aso</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+  <buildtool_depend>autoware_cmake_v49</buildtool_depend>
+
+  <build_depend>agnocastlib_v49</build_depend>
+  <build_depend>rclcpp</build_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>autoware_lint_common_v49</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

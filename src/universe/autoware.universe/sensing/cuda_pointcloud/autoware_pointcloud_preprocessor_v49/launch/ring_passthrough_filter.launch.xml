@@ -1,0 +1,15 @@
+<launch>
+  <arg name="input_topic_name" default="/sensing/lidar/top/pointcloud_raw"/>
+  <arg name="output_topic_name" default="/sensing/lidar/top/ring_passthrough_filtered/pointcloud"/>
+  <arg name="input_frame" default=""/>
+  <arg name="output_frame" default="base_link"/>
+  <arg name="passthrough_filter_uint16_param_file" default="$(find-pkg-share autoware_pointcloud_preprocessor_v49)/config/passthrough_filter_uint16_node.param.yaml"/>
+
+  <node pkg="autoware_pointcloud_preprocessor_v49" exec="passthrough_filter_uint16_node_v49" name="ring_passthrough_filter_v49">
+    <param from="$(var passthrough_filter_uint16_param_file)"/>
+    <remap from="input" to="$(var input_topic_name)"/>
+    <remap from="output" to="$(var output_topic_name)"/>
+    <param name="input_frame" value="$(var input_frame)"/>
+    <param name="output_frame" value="$(var output_frame)"/>
+  </node>
+</launch>

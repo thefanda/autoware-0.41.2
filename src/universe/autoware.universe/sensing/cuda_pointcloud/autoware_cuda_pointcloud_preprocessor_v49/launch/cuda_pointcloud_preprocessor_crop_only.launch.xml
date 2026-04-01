@@ -1,0 +1,12 @@
+<launch>
+  <arg name="input/pointcloud" default="/sensing/lidar/concatenated/pointcloud"/>
+  <arg name="output/pointcloud" default="/sensing/lidar/top/pointcloud_cropped"/>
+  <arg name="cuda_pointcloud_preprocessor_crop_only_param_file" default="$(find-pkg-share autoware_cuda_pointcloud_preprocessor_v49)/config/cuda_pointcloud_preprocessor_crop_only.param.yaml"/>
+
+  <node pkg="autoware_cuda_pointcloud_preprocessor_v49" exec="cuda_pointcloud_preprocessor_crop_only_node_v49" name="cuda_pointcloud_preprocessor_crop_only_v49" output="screen">
+    <remap from="~/input/pointcloud" to="$(var input/pointcloud)"/>
+    <remap from="~/output/pointcloud" to="$(var output/pointcloud)"/>
+    <param from="$(var cuda_pointcloud_preprocessor_crop_only_param_file)"/>
+  </node>
+</launch>
+

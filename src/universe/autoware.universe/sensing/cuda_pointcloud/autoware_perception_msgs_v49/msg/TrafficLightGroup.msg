@@ -1,0 +1,3 @@
+int64 traffic_light_group_id
+autoware_perception_msgs_v49/TrafficLightElement[] elements
+autoware_perception_msgs_v49/PredictedTrafficLightState[] predictions

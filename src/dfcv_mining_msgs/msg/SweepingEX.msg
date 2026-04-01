@@ -1,0 +1,36 @@
+uint8 cleaning_mode_switch
+uint8 cleaning_start_enable
+uint8 front_spray_enable
+uint8 auto_cleaning_mode_switch
+uint8 high_voltage_switch
+
+uint8 water_tank_lid_enable
+uint8 sewage_discharge_enable
+uint8 music_switch
+uint8 working_lamp_switch
+uint8 sweeping_disc_speed_switch
+uint8 left_arrow_lamp_switch
+uint8 right_arrow_lamp_switch
+
+uint8 sewage_tank_door_opening_enable
+uint8 sewage_tank_door_closing_enable
+uint8 sewage_tank_lifting_enable
+uint8 sewage_tank_droping_enable
+uint8 sewage_tank_force_enable
+uint8 self_cleaning_enable
+uint8 sewage_outlet_out_enable
+
+uint16 blower_speed_control
+
+uint8 start_cleaning
+uint8 stop_cleaning
+
+uint8 up_ctl_task_type
+uint8 up_ctl_state_reply
+
+
+int64 time_pub
+int64 time_meas
+int8 channel_id
+int32 can_id
+uint8[8] data

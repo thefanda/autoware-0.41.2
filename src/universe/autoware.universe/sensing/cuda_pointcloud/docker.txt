@@ -1,0 +1,23 @@
+for p in $(colcon list --packages-up-to autoware_cuda_pointcloud_preprocessor_v49 --names-only); do \
+  rm -rf "build/$p" "install/$p"; \
+done
+
+colcon build --symlink-install --packages-select managed_transform_buffer_v49 --cmake-args   -DCMAKE_BUILD_TYPE=Release   -DBUILD_TESTING=OFF   -DCMAKE_CXX_FLAGS="-D_GNU_SOURCE -D__GLIBCXX_USE_CLOCK_MONOTONIC=1 -D__GLIBCXX_USE_CLOCK_REALTIME=1"
+
+agnocastlib_v49 cmakelist 加了 rt
+
+cd /opt
+sudo wget https://github.com/Kitware/CMake/releases/download/v3.27.9/cmake-3.27.9-linux-aarch64.sh
+bash cmake-3.27.9-linux-aarch64.sh 
+echo 'export PATH=/opt/cmake-3.27.9/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
+ros2 component load /ComponentManager \
+>   autoware_cuda_pointcloud_preprocessor_v49 \
+>   autoware::cuda_pointcloud_preprocessor_v49::CudaVoxelGridDownsampleFilterNode \
+>   --param voxel_size_x:=0.2 \
+>   --param voxel_size_y:=0.2 \
+>   --param voxel_size_z:=0.2
+
+
+ros2 run rclcpp_components component_container_mt
